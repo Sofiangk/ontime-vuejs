@@ -17,7 +17,9 @@
       <input type="text" class="search-bar" placeholder="Search..." />
     </div>
 
-    <div class="courses">
+    <div
+      class="courses bg-slate-100 rounded-lg border-2 border-black mb-4 w-full px-6 py-4"
+    >
       <div class="course" v-for="course in courses" :key="course.id">
         <div class="course-info">
           <span>{{ course.name }}</span>
@@ -25,6 +27,11 @@
         </div>
         <hr class="course-separator" />
       </div>
+    </div>
+    <div class="save flex items-center justify-end w-full m-0">
+      <button class="save-btn bg-slate-500 text-white px-10">
+        Save
+      </button>
     </div>
   </div>
 </template>
@@ -87,6 +94,13 @@ export default {
   cursor: pointer;
   height: 45px;
   margin-right: 10px;
+}
+
+.save-btn {
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 45px;
 }
 
 .course-dropdown,

@@ -32,6 +32,11 @@
         </div>
       </div>
     </div>
+    <div class="save flex items-center justify-end w-full m-0">
+      <button class="save-btn bg-slate-500 text-white px-10">
+        Save
+      </button>
+    </div>
   </div>
 </template>
 
@@ -54,5 +59,12 @@ select {
   width: 50%;
   height: 65px;
   padding: 0 20px;
+}
+
+.save-btn {
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 45px;
 }
 </style>
