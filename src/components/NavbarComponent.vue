@@ -4,11 +4,13 @@
       <img src="/logo.png" alt="Logo" />
     </div>
     <div class="navbar">
-      <div class="user-info px-3">
-        <i class="border-slate-700 w-2 h-2"></i>
-        <img class="user-image" src="/square.png" alt="User Image" />
-        <span class="user-name">{{ user.name }}</span>
-      </div>
+      <router-link to="/my-account">
+        <div class="user-info px-3">
+          <i class="border-slate-700 w-2 h-2"></i>
+          <img class="user-image" src="/square.png" alt="User Image" />
+          <span class="user-name">{{ user.name }}</span>
+        </div>
+      </router-link>
       <div class="title-bar">
         <h1>{{ pageTitle }}</h1>
       </div>

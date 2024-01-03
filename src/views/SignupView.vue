@@ -81,7 +81,7 @@
       <router-link to="/home">
         <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
           <button
-            @click="submitLoginForm()"
+            @click="signup()"
             class="bg-blue-800 hover:bg-blue-900 col-span-10 col-start-2 h-[3.375rem] text-white font-medium text-lg rounded-sm"
           >
             Sign up
@@ -92,7 +92,7 @@
         <p class="text-center text-sm font-normal text-slate-700">
           Already have an account?
           <router-link
-            to="/login"
+            to="/"
             class="text-blue-700 font-semibold text-primary-600 hover:underline"
             >Login</router-link
           >
@@ -109,38 +109,33 @@ import { ref } from 'vue';
 
 export default {
   name: 'SignupView',
-  methods: {
-    async login() {
-      this.$router.push('/main');
-    },
-  },
-  setup() {
-    const store = useAuthStore();
-    const email = ref('');
-    const password = ref('');
-    const errors = ref({
+  data() {
+    return {
+      name: '',
       email: '',
+      studentId: '',
       password: '',
-    });
-
-    const submitLoginForm = async () => {
+    };
+  },
+  methods: {
+    async signup() {
       try {
-        await store.login(email.value, password.value);
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/student/Reg/',
+          {
+            name: 'username',
+            email: this.email,
+            student_id: this.studentId,
+            password: this.password,
+          }
+        );
+        const token = response.data.token;
+        useAuthStore().setToken(token);
+        this.$router.push('/home');
       } catch (error) {
         console.error(error);
-        // Login failed, handle error
-        errors.value.email = 'Invalid email or password';
-        errors.value.password = 'Invalid email or password';
       }
-    };
-
-    return {
-      store,
-      email,
-      password,
-      errors,
-      submitLoginForm,
-    };
+    },
   },
 };
 </script>

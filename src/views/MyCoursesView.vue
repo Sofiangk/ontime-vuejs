@@ -18,7 +18,7 @@
     </div>
 
     <div
-      class="courses bg-slate-100 rounded-lg border-2 border-black mb-4 w-full px-6 py-4"
+      class="courses bg-slate-300 rounded-lg border-2 border-black mb-4 w-full px-6 py-4"
     >
       <div class="course" v-for="course in courses" :key="course.id">
         <div class="course-info">
@@ -37,18 +37,55 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'MyCoursesView',
   data() {
     return {
       courses: [
-        { id: 1, name: 'Course 1', selected: false },
-        { id: 2, name: 'Course 2', selected: false },
-        { id: 3, name: 'Course 3', selected: false },
-        { id: 4, name: 'Course 4', selected: false },
-        { id: 5, name: 'Course 5', selected: false },
+        { id: 1, name: 'Programming I', selected: false },
+        { id: 2, name: 'Programming II', selected: false },
+        { id: 3, name: 'Programming III', selected: false },
+        { id: 4, name: 'Intro to Software Engineering', selected: false },
+        { id: 5, name: 'Intro to Computer Network', selected: false },
+        { id: 6, name: 'Intro to Artificial Intelligence', selected: false },
+        { id: 7, name: 'Operating Systems', selected: false },
+        {
+          id: 8,
+          name: 'Database Management Systems',
+          selected: false,
+        },
+        { id: 9, name: 'Web Development', selected: false },
+        { id: 10, name: 'Software Testing', selected: false },
+        { id: 11, name: 'Computer Architecture', selected: false },
+        { id: 12, name: 'Data Structures & Algorithms', selected: false },
+        { id: 13, name: 'Software Development Practices', selected: false },
+        { id: 14, name: 'Security Practices', selected: false },
+        { id: 15, name: 'Legal & Ethical Issues I', selected: false },
+        { id: 16, name: 'Legal & Ethical Issues II', selected: false },
+        { id: 17, name: 'IT Project Management', selected: false },
+        { id: 18, name: 'Software Design', selected: false },
+        { id: 19, name: 'Software Requirements', selected: false },
+        { id: 20, name: 'Software Maintenance', selected: false },
       ],
     };
+  },
+  methods: {
+    saveCourses() {
+      // Save courses
+    },
+    fetchCourses() {
+      // Fetch courses
+      axios
+        .get('http://localhost:3000/courses')
+        .then((response) => {
+          this.courses = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -66,7 +103,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #565656;
   width: 100%;
 }
 

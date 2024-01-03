@@ -14,67 +14,56 @@ export const useAuthStore = defineStore('auth', {
     getErrorMessage: (state) => state.errorMessage,
   },
   actions: {
+    async login() {
+      try {
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/student/login/',
+          {
+            email: this.email,
+            password: this.password,
+          }
+        );
+        const token = response.data.token;
+        this.setToken(token);
+        router.push('/home');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
     async logout() {
-      axios
-        .get('endPoint', {
-          headers: {
-            Authorization: 'Bearer ' + this.token,
-          },
-        })
-        .then((response) => {
-          this.token = null;
-          this.user = {};
-          router.push({ name: 'login' });
-        })
-        .catch((error) => {
-          this.errorMessage = error.response;
-        });
+      try {
+        // Make the logout API request here
+        // Example:
+        // await axios.post('http://127.0.0.1:8000/api/student/logout/');
+        this.clearToken();
+        this.user = {};
+        router.push('/login');
+      } catch (error) {
+        console.error(error);
+      }
     },
 
-    async login(email, password) {
-      const fromData = new FormData();
-      email = email;
-
-      password = password;
-      fromData.append('email', email);
-      fromData.append('password', password);
-      axios
-        .post('http://localhost:8000/api/employee/login', fromData)
-        .then((response) => {
-          this.token = response.data.token;
-          this.user = response.data.user;
-
-          this.errorMessage = null;
-          router.push({ name: 'MainView' });
-        })
-        .catch((error) => {
-          this.errorMessage = error.response;
+    async register() {
+      try {
+        await axios.post('http://127.0.0.1:8000/api/student/register/', {
+          email: this.email,
+          password: this.password,
+          student_id: this.student_id,
+          name: this.name,
         });
+        router.push('/login');
+      } catch (error) {
+        console.error(error);
+      }
     },
-    async register(email, password, tcname, phone) {
-      const fromData = new FormData();
-      tcname = tcname;
-      email = email;
-      password = password;
-      phone = phone;
-      fromData.append('name', tcname);
-      fromData.append('email', email);
-      fromData.append('password', password);
-      fromData.append('phone_number', phone);
-
-      axios
-        .post('endPoint', fromData)
-        .then((response) => {
-          this.token = response.data.token;
-          this.user = response.data.user;
-          this.errorMessage = null;
-          router.push({ name: 'MainView' });
-        })
-        .catch((error) => {
-          this.errorMessage = error.response;
-          console.log(tcname, email, password, phone);
-        });
-      console.log(fromData);
+  },
+  mutations: {
+    setToken(token) {
+      this.token = token;
+    },
+    clearToken() {
+      this.token = null;
     },
   },
   persist: true,

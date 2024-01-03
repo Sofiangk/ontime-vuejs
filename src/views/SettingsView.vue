@@ -17,6 +17,18 @@
               <option value="ar">Arabic</option>
             </select>
           </div>
+          <div class="flex items-center justify-between py-6 border-b-2">
+            <label for="language">Theme</label>
+            <select
+              class="bg-slate-400 text-white p-4"
+              id="language"
+              v-model="selectedTheme"
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+
           <div class="flex items-center justify-between py-6 border-b-0">
             <label for="fontSize">Font Size:</label>
             <select
@@ -47,6 +59,7 @@ export default {
     return {
       selectedLanguage: 'en',
       selectedFontSize: 'medium',
+      selectedTheme: 'light',
     };
   },
 };

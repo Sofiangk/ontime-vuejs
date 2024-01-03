@@ -52,12 +52,7 @@ export default {
   },
   data() {
     return {
-      posts: [
-        { tags: ['course', 'department'] },
-        { tags: ['software-engineering', 'course'] },
-        { tags: ['computer-network', 'department'] },
-        { tags: ['artificial-intelligence', 'course'] },
-      ],
+      posts: [],
     };
   },
   mounted() {

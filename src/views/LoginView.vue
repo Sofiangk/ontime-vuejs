@@ -49,18 +49,6 @@
           required
         />
       </div>
-      <!-- <div
-        v-if="store.errorMessage"
-        class="grid grid-flow-col grid-cols-12 my-4"
-      >
-        <p
-          class="col-span-10 
-        col-start-2
-        text-red-500"
-        >
-          *Incorrect email or password
-        </p>
-      </div> -->
       <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
         <div class="flex items-center justify-between col-span-10 col-start-2">
           <div class="flex items-start">
@@ -87,7 +75,7 @@
       <router-link to="/home">
         <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
           <button
-            @click="submitLoginForm()"
+            @click="login()"
             class="bg-blue-800 hover:bg-blue-900 col-span-10 col-start-2 h-[3.375rem] text-white font-medium text-lg rounded-sm"
           >
             Login
@@ -109,44 +97,69 @@
   </main>
 </template>
 
-<script>
+<!-- <script>
 import { useAuthStore } from '../stores/AuthStore';
-import { ref } from 'vue';
+import axios from 'axios';
 
 export default {
   name: 'LoginView',
+  data() {
+    return {
+      email: 'sufyan_3196@limu.edu.ly',
+      password: '12345678',
+    };
+  },
   methods: {
     async login() {
-      this.$router.push('/');
+      axios
+        .post('http://127.0.0.1:8000/api/student/login/', {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          // Remove the unused variable "response"
+          const token = data.token; // Fix the undefined variable "data"
+          useAuthStore().setToken(token);
+          this.$router.push('/home').catch((error) => {
+            // Fix the undefined variable "error"
+            console.error(error);
+          });
+        });
     },
   },
-  setup() {
-    const store = useAuthStore();
-    const email = ref('');
-    const password = ref('');
-    const errors = ref({
-      email: '',
-      password: '',
-    });
+};
+</script> -->
 
-    const submitLoginForm = async () => {
+<script>
+import { useAuthStore } from '../stores/AuthStore';
+import axios from 'axios';
+
+export default {
+  name: 'LoginView',
+  data() {
+    return {
+      email: 'sufyan_3196@limu.edu.ly',
+      password: '12345678',
+    };
+  },
+  methods: {
+    async login() {
       try {
-        await store.login(email.value, password.value);
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/student/login/',
+          {
+            email: this.email,
+            password: this.password,
+          }
+        );
+
+        const token = response.data.token;
+        useAuthStore().setToken(token);
+        this.$router.replace('/home');
       } catch (error) {
         console.error(error);
-        // Login failed, handle error
-        errors.value.email = 'Invalid email or password';
-        errors.value.password = 'Invalid email or password';
       }
-    };
-
-    return {
-      store,
-      email,
-      password,
-      errors,
-      submitLoginForm,
-    };
+    },
   },
 };
 </script>
