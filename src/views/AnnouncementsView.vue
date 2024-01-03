@@ -1,5 +1,5 @@
 <template>
-  <div class="forum">
+  <div class="announcements">
     <div class="filters pb-8 border-b-2 border-slate-700">
       <div class="dropdown">
         <button class="all bg-slate-400 ">All</button>
@@ -81,10 +81,9 @@ export default {
 </script>
 
 <style scoped>
-.forum {
+.announcements {
   padding: 20px;
 }
-
 .filters {
   display: flex;
   align-items: center;

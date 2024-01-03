@@ -1,15 +1,15 @@
 <template>
   <div class="grid grid-cols-12 h-screen">
-    <NavbarComponent class="col-span-12" v-if="!$route.meta.hideNavbar" />
+    <NavbarComponent class="z-10 col-span-12" v-if="!$route.meta.hideNavbar" />
     <SidebarComponent
-      class="col-span-2 full-minus-navbar"
+      class="mt-[10rem] col-start-2 col-span-2 full-minus-navbar"
       v-if="!$route.meta.hideNavbar"
     />
     <router-view
       :class="
         $route.meta.hideNavbar
           ? 'col-span-full bg-white'
-          : 'col-span-10 bg-white'
+          : 'col-span-10 col-start-3 mt-[10rem] bg-white'
       "
     />
   </div>

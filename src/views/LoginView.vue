@@ -4,7 +4,7 @@
       class="bg-circle w-full col-span-11 aspect-square bg-slate-500 z-0 rounded-t-full fixed translate-auto bottom-10 sm:rounded-b-none"
     ></div>
     <div
-      class="max-h-[38rem] h-fit col-span-9 col-start-2 rounded-lg sm:col-span-9 sm:col-start-2 md:col-span-3 md:col-start-5 mt-12 bg-white border-2 border-slate-800 z-10"
+      class="min-h-[38rem] h-fit col-span-9 col-start-2 rounded-lg sm:col-span-9 sm:col-start-2 md:col-span-3 md:col-start-5 mt-12 bg-white border-2 border-slate-800 z-10"
     >
       <div class="grid grid-flow-row sm:grid-flow-col grid-row-2 sm:grid-col-2">
         <div class="flex items-center justify-center mx-auto gap-2">
@@ -30,7 +30,7 @@
           v-model="email"
           id="email"
           type="email"
-          placeholder="yourname_id@university.edu.ly"
+          placeholder="yourname_id@limu.edu.ly"
           class="col-span-10 rounded-sm col-start-2 h-[3.375rem] bg-gray-50 pr-4 text-sm font-normal p-3.5"
           required
         />
@@ -49,7 +49,7 @@
           required
         />
       </div>
-      <div
+      <!-- <div
         v-if="store.errorMessage"
         class="grid grid-flow-col grid-cols-12 my-4"
       >
@@ -60,7 +60,7 @@
         >
           *Incorrect email or password
         </p>
-      </div>
+      </div> -->
       <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
         <div class="flex items-center justify-between col-span-10 col-start-2">
           <div class="flex items-start">
@@ -84,14 +84,16 @@
           </router-link>
         </div>
       </div>
-      <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
-        <button
-          @click="submitLoginForm()"
-          class="bg-[#28419E] col-span-10 col-start-2 h-[3.375rem] text-white font-medium text-lg rounded-sm"
-        >
-          Login
-        </button>
-      </div>
+      <router-link to="/home">
+        <div class="grid grid-flow-col grid-cols-12 my-4 pb-5">
+          <button
+            @click="submitLoginForm()"
+            class="bg-blue-800 hover:bg-blue-900 col-span-10 col-start-2 h-[3.375rem] text-white font-medium text-lg rounded-sm"
+          >
+            Login
+          </button>
+        </div>
+      </router-link>
       <div class="col-span-10 col-start-2">
         <p class="text-center text-sm font-normal text-slate-700">
           Don’t have an account yet?

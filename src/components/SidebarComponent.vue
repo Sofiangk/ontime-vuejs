@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar min-h-screen">
+  <div class="sidebar min-h-[83vh]">
     <div class="sidebar-links">
       <router-link
         class="hover:bg-slate-200 my-2 py-4 mx-[10px] border-b-2"
-        to="/"
+        to="/home"
         >Timetable</router-link
       >
       <router-link
@@ -33,22 +33,14 @@
         to="/settings"
         >Settings</router-link
       >
-      <router-link
-        class="hover:bg-slate-200 my-2 py-4 mx-[10px] border-b-2 "
-        to="/login"
-        >Login</router-link
-      >
-      <router-link
-        class="hover:bg-slate-200 my-2 py-4 mx-[10px] border-b-2 "
-        to="/signup"
-        >Sign Up</router-link
-      >
-      <p
-        class="hover:bg-slate-200 my-2 py-4 mx-[10px] hover:cursor-pointer"
-        @click="logout()"
-      >
-        Logout
-      </p>
+      <router-link class="hover:bg-slate-200" to="/">
+        <p
+          class="hover:bg-slate-200 my-2 py-4 mx-[10px] hover:cursor-pointer"
+          @click="logout()"
+        >
+          Logout
+        </p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -64,7 +56,8 @@ export default {
   width: 15vw;
   background-color: #f5f5f5;
   border-right: 2px solid black;
-  position: sticky;
+  position: fixed;
+  max-height: 80px;
 }
 
 .sidebar-header {

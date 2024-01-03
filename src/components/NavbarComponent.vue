@@ -37,9 +37,26 @@ export default {
     updatePageTitle(route) {
       this.pageTitle = route.meta.title || '';
     },
-  },
-  mounted() {
-    this.updatePageTitle(this.$route);
+    mounted() {
+      this.updatePageTitle(this.$route);
+      this.getUserInfo();
+    },
+    methods: {
+      getUserInfo() {
+        axios
+          .get('http://127.0.0.1:8000/api/student/')
+          .then((response) => {
+            this.user.name = response.data.name;
+            this.user.image = response.data.image;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      },
+    },
+    mounted() {
+      this.updatePageTitle(this.$route);
+    },
   },
 };
 </script>
@@ -53,6 +70,7 @@ export default {
   border-bottom: 2px solid #000000;
   background-color: white;
   height: 160px;
+  position: fixed;
 }
 
 .logo {

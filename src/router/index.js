@@ -10,16 +10,16 @@ import SettingsView from '../views/SettingsView.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView,
     meta: {
-      title: 'TimeTable',
+      title: 'Timetable',
       hideNavbar: false,
     },
   },
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: LoginView,
     meta: {

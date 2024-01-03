@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import PostComponent from '../components/PostComponent.vue';
 
 export default {
@@ -52,30 +53,27 @@ export default {
   data() {
     return {
       posts: [
-        {
-          id: 1,
-          title: 'First Post',
-          body:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          tags: ['course-name', 'department-name'],
-        },
-        {
-          id: 2,
-          title: 'Second Post',
-          body:
-            'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-          tags: ['course-name', 'department-name'],
-        },
-        {
-          id: 3,
-          title: 'Third Post',
-          body:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          tags: ['course-name', 'department-name'],
-        },
-        // Add more posts here...
+        { tags: ['course', 'department'] },
+        { tags: ['software-engineering', 'course'] },
+        { tags: ['computer-network', 'department'] },
+        { tags: ['artificial-intelligence', 'course'] },
       ],
     };
+  },
+  mounted() {
+    this.fetchPosts();
+  },
+  methods: {
+    fetchPosts() {
+      axios
+        .get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        .then((response) => {
+          this.posts = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
@@ -84,7 +82,6 @@ export default {
 .forum {
   padding: 20px;
 }
-
 .filters {
   display: flex;
   align-items: center;
@@ -127,7 +124,7 @@ export default {
 
 .search-bar {
   padding: 5px 10px;
-  border: 1px solid #b5b5b5;
+  border: 1px solid #ccc;
   border-radius: 3px;
   width: 20rem;
   height: 45px;
